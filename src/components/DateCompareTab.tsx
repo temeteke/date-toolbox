@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { compareDateStrings, sortDatesDescending } from '../lib/dateCompare';
+import { compareDateStrings, sortDatesDescending } from '../lib/core/dateCompare';
 import { format } from 'date-fns';
 
 export default function DateCompareTab() {

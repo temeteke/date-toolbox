@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateAnniversaries } from '../lib/anniversary';
+import { calculateAnniversaries } from '../lib/analysis/anniversary';
 import { format, differenceInDays } from 'date-fns';
 
 export default function AnniversaryTab() {

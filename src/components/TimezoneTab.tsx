@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { MAJOR_TIMEZONES, convertTimezone, getMultiTimezoneDisplay, getTimezoneName, getCurrentOffset } from '../lib/timezone';
+import { MAJOR_TIMEZONES, convertTimezone, getMultiTimezoneDisplay, getTimezoneName, getCurrentOffset } from '../lib/format/timezone';
 
 type ViewMode = 'convert' | 'multi';
 

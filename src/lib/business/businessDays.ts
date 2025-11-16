@@ -1,6 +1,6 @@
 import { eachDayOfInterval, getDay, isSameDay } from 'date-fns';
-import type { BusinessDaysOptions, BusinessDaysResult } from '../types/businessDays';
-import { parseDate } from './utils';
+import type { BusinessDaysOptions, BusinessDaysResult } from '../../types/business/businessDays';
+import { parseDate } from '../utils';
 
 /**
  * 営業日数を計算

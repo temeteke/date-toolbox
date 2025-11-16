@@ -1,6 +1,6 @@
 import { isBefore, isAfter, isEqual } from 'date-fns';
-import type { WarekiEra, WarekiDate, WarekiConversionResult } from '../types/wareki';
-import { isValidDate } from './utils';
+import type { WarekiEra, WarekiDate, WarekiConversionResult } from '../../types/japanese/wareki';
+import { isValidDate } from '../utils';
 
 /**
  * 元号データ（明治以降）

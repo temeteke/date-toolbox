@@ -1,5 +1,5 @@
 import { addDays, addYears, differenceInDays } from 'date-fns';
-import type { Anniversary, AnniversaryResult } from '../types/anniversary';
+import type { Anniversary, AnniversaryResult } from '../../types/analysis/anniversary';
 
 /**
  * 記念日のマイルストーン（日数）

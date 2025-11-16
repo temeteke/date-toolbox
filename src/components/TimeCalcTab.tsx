@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateTimeDifference, addTime } from '../lib/timeCalc';
+import { calculateTimeDifference, addTime } from '../lib/format/timeCalc';
 
 type CalcMode = 'diff' | 'add-subtract';
 

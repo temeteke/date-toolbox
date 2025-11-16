@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
-import { calculateTimeDifference } from '../lib/timeCalc';
+import { calculateTimeDifference } from '../lib/format/timeCalc';
 
 type CountMode = 'countdown' | 'countup';
 

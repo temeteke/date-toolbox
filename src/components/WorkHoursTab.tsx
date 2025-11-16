@@ -3,8 +3,8 @@ import DateInput from './common/DateInput';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateWorkHours, summarizeWorkRecords } from '../lib/workHours';
-import type { WorkRecord } from '../types/workHours';
+import { calculateWorkHours, summarizeWorkRecords } from '../lib/business/workHours';
+import type { WorkRecord } from '../types/business/workHours';
 import { format } from 'date-fns';
 
 type CalcMode = 'single' | 'summary';

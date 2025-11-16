@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateAge, calculateMilestoneAges } from '../lib/age';
+import { calculateAge, calculateMilestoneAges } from '../lib/core/age';
 import { formatDateJa, isValidDate } from '../lib/utils';
 
 export default function AgeTab() {

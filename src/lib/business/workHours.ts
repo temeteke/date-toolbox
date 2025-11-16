@@ -1,4 +1,4 @@
-import type { WorkRecord, WorkHoursResult, WorkSummary } from '../types/workHours';
+import type { WorkRecord, WorkHoursResult, WorkSummary } from '../../types/business/workHours';
 
 /**
  * 勤務時間を計算

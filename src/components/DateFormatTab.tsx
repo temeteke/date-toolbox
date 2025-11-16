@@ -8,7 +8,7 @@ import {
   fromUnixMillis,
   fromISOString,
   FORMAT_PRESETS,
-} from '../lib/dateFormat';
+} from '../lib/format/dateFormat';
 
 type InputMode = 'date-picker' | 'iso' | 'unix' | 'unix-millis';
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getHistory, removeHistoryItem, clearHistory } from '../lib/history';
-import type { HistoryItem } from '../types/history';
+import { getHistory, removeHistoryItem, clearHistory } from '../lib/data/history';
+import type { HistoryItem } from '../types/data/history';
 import ResultCard from './common/ResultCard';
 import { format } from 'date-fns';
 

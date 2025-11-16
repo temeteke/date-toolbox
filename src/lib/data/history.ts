@@ -1,4 +1,4 @@
-import type { HistoryItem, HistoryState } from '../types/history';
+import type { HistoryItem, HistoryState } from '../../types/data/history';
 
 const STORAGE_KEY = 'date-toolbox-history';
 const MAX_HISTORY_ITEMS = 50;

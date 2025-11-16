@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateDateRangeStats } from '../lib/dateStats';
+import { calculateDateRangeStats } from '../lib/analysis/dateStats';
 import { format } from 'date-fns';
 
 export default function DateStatsTab() {

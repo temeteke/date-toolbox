@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { addMonths, subMonths } from 'date-fns';
 import Calendar from './common/Calendar';
-import { getHolidays } from '../lib/holiday';
+import { getHolidays } from '../lib/japanese/holiday';
 import { getISOWeekNumber, getDayOfYear } from '../lib/utils';
 
 export default function CalendarTab() {
