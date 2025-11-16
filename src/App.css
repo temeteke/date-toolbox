@@ -291,9 +291,25 @@
     background-color: #2a2a3a;
   }
 
+  .tabs-nav button {
+    background-color: #1a1a2a;
+    color: #e0e0e0;
+  }
+
+  .tabs-nav button.active {
+    background-color: #667eea;
+    color: white;
+  }
+
+  .tabs-nav button:hover:not(:disabled) {
+    background-color: #764ba2;
+    color: white;
+  }
+
   .app-footer {
     background-color: #1a1a2a;
     border-top-color: #3a3a4a;
+    color: #b0b0b0;
   }
 
   .result-item,
@@ -482,6 +498,7 @@
 
   .date-item {
     background-color: #1a1a2a;
+    color: #e0e0e0;
   }
 
   .date-item:hover {
@@ -502,6 +519,12 @@
     border-top-color: #3a3a4a;
   }
 
+  .weekday-exclusion h3,
+  .holidays-input h3,
+  .recurrence-pattern h3 {
+    color: #c0c0c0;
+  }
+
   .holidays-input textarea {
     background-color: #1a1a1a;
     color: #f5f5f5;
@@ -510,5 +533,44 @@
 
   .dates-scroll {
     border-color: #4a4a4a;
+  }
+
+  .date-input label,
+  .number-input label,
+  .unit-select label,
+  .options h3 {
+    color: #c0c0c0;
+  }
+
+  .result-label {
+    color: #b0b0b0;
+  }
+
+  .result-value {
+    color: #e0e0e0;
+  }
+
+  .milestone-date {
+    color: #b0b0b0;
+  }
+
+  .milestone-status {
+    color: #888;
+  }
+
+  .milestone-age {
+    color: #e0e0e0;
+  }
+
+  .placeholder {
+    color: #888;
+  }
+
+  .app-footer {
+    color: #b0b0b0;
+  }
+
+  .input-hint {
+    color: #888;
   }
 }
