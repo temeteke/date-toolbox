@@ -72,7 +72,9 @@
 /* タブコンテンツ共通スタイル */
 .date-diff-tab,
 .add-subtract-tab,
-.age-tab {
+.age-tab,
+.business-days-tab,
+.recurrence-tab {
   animation: fadeIn 0.3s;
 }
 
@@ -305,5 +307,208 @@
 
   .result-card h3 {
     border-bottom-color: #3a3a4a;
+  }
+}
+
+/* BusinessDays Tab 専用スタイル */
+.weekday-exclusion {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.weekday-exclusion h3 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #555;
+}
+
+.weekday-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.weekday-checkboxes label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.holidays-input {
+  margin-top: 1.5rem;
+}
+
+.holidays-input h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+.input-hint {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.holidays-input textarea {
+  width: 100%;
+  padding: 0.8em;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  resize: vertical;
+}
+
+.result-value.highlight {
+  color: #667eea;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.business-dates-list,
+.recurrence-dates-list {
+  margin-top: 1rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.business-dates-list h3,
+.recurrence-dates-list h3 {
+  color: #667eea;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.dates-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.date-item {
+  padding: 0.6rem;
+  margin-bottom: 0.3rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+.date-item:hover {
+  background-color: #eef;
+}
+
+.date-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Recurrence Tab 専用スタイル */
+.recurrence-pattern {
+  margin-top: 1.5rem;
+}
+
+.recurrence-pattern h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.pattern-option {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.pattern-option:has(input[type="radio"]:checked) {
+  border-color: #667eea;
+  background-color: #f8f8ff;
+}
+
+.pattern-option > label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.pattern-detail {
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pattern-detail select,
+.pattern-detail input[type="number"] {
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.pattern-detail input[type="number"] {
+  width: 80px;
+}
+
+.result-summary {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.result-summary h3 {
+  color: #667eea;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .business-dates-list,
+  .recurrence-dates-list,
+  .result-summary {
+    background-color: #2a2a3a;
+  }
+
+  .date-item {
+    background-color: #1a1a2a;
+  }
+
+  .date-item:hover {
+    background-color: #3a3a5a;
+  }
+
+  .pattern-option {
+    border-color: #4a4a5a;
+  }
+
+  .pattern-option:has(input[type="radio"]:checked) {
+    border-color: #667eea;
+    background-color: #2a2a4a;
+  }
+
+  .weekday-exclusion,
+  .holidays-input {
+    border-top-color: #3a3a4a;
+  }
+
+  .holidays-input textarea {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    border-color: #4a4a4a;
+  }
+
+  .dates-scroll {
+    border-color: #4a4a4a;
   }
 }

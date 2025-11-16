@@ -2,6 +2,8 @@ import { useState } from 'react';
 import DateDiffTab from './components/DateDiffTab';
 import AddSubtractTab from './components/AddSubtractTab';
 import AgeTab from './components/AgeTab';
+import BusinessDaysTab from './components/BusinessDaysTab';
+import RecurrenceTab from './components/RecurrenceTab';
 import './App.css';
 
 type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age';
@@ -38,16 +40,14 @@ function App() {
         <button
           className={activeTab === 'business' ? 'active' : ''}
           onClick={() => setActiveTab('business')}
-          disabled
         >
-          営業日（未実装）
+          営業日
         </button>
         <button
           className={activeTab === 'recurrence' ? 'active' : ''}
           onClick={() => setActiveTab('recurrence')}
-          disabled
         >
-          繰り返し（未実装）
+          繰り返し
         </button>
       </nav>
 
@@ -55,16 +55,8 @@ function App() {
         {activeTab === 'diff' && <DateDiffTab />}
         {activeTab === 'add-subtract' && <AddSubtractTab />}
         {activeTab === 'age' && <AgeTab />}
-        {activeTab === 'business' && (
-          <div className="placeholder">
-            <p>営業日計算機能は今後実装予定です。</p>
-          </div>
-        )}
-        {activeTab === 'recurrence' && (
-          <div className="placeholder">
-            <p>繰り返し日付生成機能は今後実装予定です。</p>
-          </div>
-        )}
+        {activeTab === 'business' && <BusinessDaysTab />}
+        {activeTab === 'recurrence' && <RecurrenceTab />}
       </main>
 
       <footer className="app-footer">
