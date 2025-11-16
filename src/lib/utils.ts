@@ -1,4 +1,4 @@
-import { format, parse, isValid, isBefore, isEqual } from 'date-fns';
+import { format, parse, isValid, isBefore, isEqual, getWeek, startOfYear, differenceInDays } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
 /**
@@ -97,4 +97,23 @@ export function formatDateJa(date: Date): string {
  */
 export function formatDateWithWeekdayJa(date: Date): string {
   return format(date, 'yyyy年MM月dd日（E）', { locale: ja });
+}
+
+/**
+ * ISO週番号を取得
+ * @param date 日付
+ * @returns ISO週番号
+ */
+export function getISOWeekNumber(date: Date): number {
+  return getWeek(date, { weekStartsOn: 1 });
+}
+
+/**
+ * 年間通算日（1月1日からの日数）を取得
+ * @param date 日付
+ * @returns 年間通算日（1から始まる）
+ */
+export function getDayOfYear(date: Date): number {
+  const start = startOfYear(date);
+  return differenceInDays(date, start) + 1;
 }
