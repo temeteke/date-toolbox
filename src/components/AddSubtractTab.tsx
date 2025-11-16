@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
@@ -11,20 +11,14 @@ export default function AddSubtractTab() {
   const [baseDate, setBaseDate] = useState<Date | null>(new Date());
   const [amount, setAmount] = useState(0);
   const [unit, setUnit] = useState<TimeUnit>('days');
-  const [error, setError] = useState('');
 
-  const handleCalculate = () => {
-    setError('');
-
+  const { result, error } = useMemo(() => {
     if (!baseDate) {
-      setError('基準日を入力してください。');
-      return null;
+      return { result: null, error: '基準日を入力してください。' };
     }
 
-    return addSubtractDate({ baseDate, amount, unit });
-  };
-
-  const result = handleCalculate();
+    return { result: addSubtractDate({ baseDate, amount, unit }), error: '' };
+  }, [baseDate, amount, unit]);
 
   const getDirectionText = () => {
     if (!result) return '';

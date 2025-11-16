@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
@@ -9,36 +9,32 @@ export default function AgeTab() {
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [referenceDate, setReferenceDate] = useState<Date | null>(new Date());
   const [showMilestones, setShowMilestones] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleCalculate = () => {
-    setError('');
-
+  const { result, error } = useMemo(() => {
     if (!birthDate) {
-      setError('生年月日を入力してください。');
-      return null;
+      return { result: null, error: '生年月日を入力してください。' };
     }
 
     if (!isValidDate(birthDate)) {
-      setError('有効な生年月日を入力してください。');
-      return null;
+      return { result: null, error: '有効な生年月日を入力してください。' };
     }
 
     const refDate = referenceDate || new Date();
 
     if (birthDate > refDate) {
-      setError('生年月日は基準日以前の日付を指定してください。');
-      return null;
+      return { result: null, error: '生年月日は基準日以前の日付を指定してください。' };
     }
 
-    return calculateAge({ birthDate, referenceDate: refDate });
-  };
+    return { result: calculateAge({ birthDate, referenceDate: refDate }), error: '' };
+  }, [birthDate, referenceDate]);
 
-  const result = handleCalculate();
-
-  const milestones = birthDate
-    ? calculateMilestoneAges(birthDate, [20, 30, 40, 50, 60, 65, 70, 80, 90, 100])
-    : [];
+  const milestones = useMemo(
+    () =>
+      birthDate
+        ? calculateMilestoneAges(birthDate, [20, 30, 40, 50, 60, 65, 70, 80, 90, 100])
+        : [],
+    [birthDate]
+  );
 
   return (
     <div className="age-tab">

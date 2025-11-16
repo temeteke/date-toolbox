@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ErrorMessage from './common/ErrorMessage';
 import { generateRecurringDates } from '../lib/recurrence';
@@ -21,19 +21,14 @@ export default function RecurrenceTab() {
   const [weekday, setWeekday] = useState(1); // 月曜日
   const [monthDate, setMonthDate] = useState(1);
   const [weekNumber, setWeekNumber] = useState(1);
-  const [error, setError] = useState('');
 
-  const handleCalculate = () => {
-    setError('');
-
+  const { result, error } = useMemo(() => {
     if (!startDate || !endDate) {
-      setError('開始日と終了日を入力してください。');
-      return null;
+      return { result: null, error: '開始日と終了日を入力してください。' };
     }
 
     if (!isValidDateRange(startDate, endDate)) {
-      setError('開始日は終了日以前の日付を指定してください。');
-      return null;
+      return { result: null, error: '開始日は終了日以前の日付を指定してください。' };
     }
 
     let pattern: RecurrencePattern;
@@ -50,26 +45,22 @@ export default function RecurrenceTab() {
         break;
     }
 
-    const result = generateRecurringDates({
+    const resultData = generateRecurringDates({
       startDate,
       endDate,
       pattern,
     });
 
-    if (result.count === 0) {
-      setError('指定された条件に一致する日付が見つかりませんでした。');
-      return null;
+    if (resultData.count === 0) {
+      return { result: null, error: '指定された条件に一致する日付が見つかりませんでした。' };
     }
 
-    if (result.count > 1000) {
-      setError('日付が1000件を超えました。期間を短くしてください。');
-      return null;
+    if (resultData.count > 1000) {
+      return { result: null, error: '日付が1000件を超えました。期間を短くしてください。' };
     }
 
-    return result;
-  };
-
-  const result = handleCalculate();
+    return { result: resultData, error: '' };
+  }, [startDate, endDate, recurrenceType, weekday, monthDate, weekNumber]);
 
   return (
     <div className="recurrence-tab">
