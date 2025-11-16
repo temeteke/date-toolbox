@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
@@ -13,7 +13,6 @@ export default function BusinessDaysTab() {
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [excludedWeekdays, setExcludedWeekdays] = useState<number[]>([0, 6]); // デフォルトで土日
   const [holidaysText, setHolidaysText] = useState('');
-  const [error, setError] = useState('');
 
   const handleWeekdayToggle = (weekday: number) => {
     if (excludedWeekdays.includes(weekday)) {
@@ -23,17 +22,13 @@ export default function BusinessDaysTab() {
     }
   };
 
-  const handleCalculate = () => {
-    setError('');
-
+  const { result, error } = useMemo(() => {
     if (!startDate || !endDate) {
-      setError('開始日と終了日を入力してください。');
-      return null;
+      return { result: null, error: '開始日と終了日を入力してください。' };
     }
 
     if (!isValidDateRange(startDate, endDate)) {
-      setError('開始日は終了日以前の日付を指定してください。');
-      return null;
+      return { result: null, error: '開始日は終了日以前の日付を指定してください。' };
     }
 
     // 休日リストをパース
@@ -44,10 +39,8 @@ export default function BusinessDaysTab() {
       holidays,
     };
 
-    return calculateBusinessDays(startDate, endDate, options);
-  };
-
-  const result = handleCalculate();
+    return { result: calculateBusinessDays(startDate, endDate, options), error: '' };
+  }, [startDate, endDate, excludedWeekdays, holidaysText]);
 
   return (
     <div className="business-days-tab">

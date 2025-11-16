@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
@@ -12,19 +12,14 @@ export default function DateDiffTab() {
   const [includeStartDate, setIncludeStartDate] = useState(true);
   const [includeEndDate, setIncludeEndDate] = useState(true);
   const [excludeWeekends, setExcludeWeekends] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleCalculate = () => {
-    setError('');
-
+  const { result, error } = useMemo(() => {
     if (!startDate || !endDate) {
-      setError('開始日と終了日を入力してください。');
-      return null;
+      return { result: null, error: '開始日と終了日を入力してください。' };
     }
 
     if (!isValidDateRange(startDate, endDate)) {
-      setError('開始日は終了日以前の日付を指定してください。');
-      return null;
+      return { result: null, error: '開始日は終了日以前の日付を指定してください。' };
     }
 
     const options: DateDiffOptions = {
@@ -33,10 +28,8 @@ export default function DateDiffTab() {
       excludeWeekends,
     };
 
-    return calculateDateDiff(startDate, endDate, options);
-  };
-
-  const result = handleCalculate();
+    return { result: calculateDateDiff(startDate, endDate, options), error: '' };
+  }, [startDate, endDate, includeStartDate, includeEndDate, excludeWeekends]);
 
   return (
     <div className="date-diff-tab">
