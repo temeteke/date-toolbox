@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#4a90e2" rx="64"/>
+  <g fill="#ffffff">
+    <!-- Calendar icon -->
+    <rect x="100" y="120" width="312" height="280" rx="20" fill="none" stroke="#ffffff" stroke-width="24"/>
+    <rect x="100" y="120" width="312" height="80" rx="20" fill="#ffffff" opacity="0.3"/>
+    <line x1="180" y1="80" x2="180" y2="160" stroke="#ffffff" stroke-width="20" stroke-linecap="round"/>
+    <line x1="332" y1="80" x2="332" y2="160" stroke="#ffffff" stroke-width="20" stroke-linecap="round"/>
+
+    <!-- Date numbers -->
+    <text x="256" y="300" font-family="Arial, sans-serif" font-size="120" font-weight="bold" text-anchor="middle" fill="#ffffff">📅</text>
+  </g>
+</svg>

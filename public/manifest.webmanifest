@@ -1,0 +1,27 @@
+{
+  "name": "Date Toolbox - 日付計算ツール集",
+  "short_name": "Date Toolbox",
+  "description": "日付の期間計算、加算/減算、年齢計算、営業日計算、繰り返し日付を簡単に計算できるツール集",
+  "start_url": "/date-toolbox/",
+  "scope": "/date-toolbox/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4a90e2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/date-toolbox/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/date-toolbox/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "ja"
+}
