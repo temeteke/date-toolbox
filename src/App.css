@@ -74,7 +74,11 @@
 .add-subtract-tab,
 .age-tab,
 .business-days-tab,
-.recurrence-tab {
+.recurrence-tab,
+.wareki-tab,
+.time-calc-tab,
+.countdown-tab,
+.calendar-tab {
   animation: fadeIn 0.3s;
 }
 
@@ -572,5 +576,388 @@
 
   .input-hint {
     color: #888;
+  }
+}
+
+/* Calendar Tab Styles */
+.calendar {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-header h3 {
+  color: #667eea;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.calendar-weekday.sunday {
+  color: #e74c3c;
+}
+
+.calendar-weekday.saturday {
+  color: #3498db;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.calendar-day:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.calendar-day.other-month {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.calendar-day.other-month:hover {
+  background-color: transparent;
+  transform: none;
+}
+
+.calendar-day.today {
+  background-color: #667eea;
+  color: white;
+  font-weight: 700;
+}
+
+.calendar-day.highlighted {
+  background-color: #ffd700;
+  border-color: #ffa500;
+}
+
+.calendar-day.holiday {
+  background-color: #ffe0e0;
+  color: #c33;
+}
+
+.calendar-day.sunday .day-number {
+  color: #e74c3c;
+}
+
+.calendar-day.saturday .day-number {
+  color: #3498db;
+}
+
+.calendar-day.today .day-number {
+  color: white;
+}
+
+.day-number {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.holiday-name {
+  font-size: 0.65rem;
+  text-align: center;
+  margin-top: 0.2rem;
+  line-height: 1.1;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-controls button {
+  padding: 0.8em 1.5em;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.calendar-controls button:hover {
+  background-color: #764ba2;
+}
+
+.selected-date-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 1.5rem;
+}
+
+.selected-date-info h3 {
+  color: #667eea;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+/* Countdown Tab Styles */
+.countdown-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 0;
+  margin: 1.5rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  opacity: 0.9;
+}
+
+.countdown-separator {
+  font-size: 2rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.result-details {
+  margin-top: 1rem;
+}
+
+.result-item.warning {
+  background-color: #fee;
+  padding: 1rem;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.result-item.warning .result-value {
+  color: #c33;
+  text-align: center;
+}
+
+/* Wareki Tab Styles */
+.mode-selector,
+.operation-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.mode-selector label,
+.operation-selector label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.wareki-input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.wareki-input-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wareki-input-group select,
+.wareki-input-group input {
+  padding: 0.8em;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Time Calc Tab Styles */
+.time-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.time-diff-inputs label,
+.time-add-subtract-inputs > label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.time-diff-inputs input,
+.time-add-subtract-inputs > label > input {
+  padding: 0.8em;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .calendar,
+  .selected-date-info {
+    background-color: #2a2a3a;
+  }
+
+  .calendar-day {
+    border-color: #4a4a4a;
+    background-color: #1a1a2a;
+    color: #e0e0e0;
+  }
+
+  .calendar-day:hover {
+    background-color: #3a3a4a;
+  }
+
+  .calendar-day.today {
+    background-color: #667eea;
+    color: white;
+  }
+
+  .calendar-day.holiday {
+    background-color: #4a2a2a;
+    color: #ff6666;
+  }
+
+  .calendar-weekday {
+    color: #c0c0c0;
+  }
+
+  .mode-selector,
+  .operation-selector {
+    background-color: #1a1a2a;
+  }
+
+  .info-item {
+    border-bottom-color: #3a3a4a;
+  }
+
+  .info-label {
+    color: #b0b0b0;
+  }
+
+  .info-value {
+    color: #e0e0e0;
+  }
+}
+
+@media (max-width: 768px) {
+  .countdown-value {
+    font-size: 2rem;
+  }
+
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+
+  .calendar-day {
+    padding: 0.3rem;
+  }
+
+  .day-number {
+    font-size: 0.9rem;
+  }
+
+  .holiday-name {
+    font-size: 0.55rem;
+  }
+
+  .wareki-input-group {
+    grid-template-columns: 1fr;
+  }
+
+  .time-inputs {
+    grid-template-columns: 1fr;
   }
 }

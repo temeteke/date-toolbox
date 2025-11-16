@@ -4,9 +4,13 @@ import AddSubtractTab from './components/AddSubtractTab';
 import AgeTab from './components/AgeTab';
 import BusinessDaysTab from './components/BusinessDaysTab';
 import RecurrenceTab from './components/RecurrenceTab';
+import WarekiTab from './components/WarekiTab';
+import TimeCalcTab from './components/TimeCalcTab';
+import CountdownTab from './components/CountdownTab';
+import CalendarTab from './components/CalendarTab';
 import './App.css';
 
-type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age';
+type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar';
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('diff');
@@ -49,6 +53,30 @@ function App() {
         >
           繰り返し
         </button>
+        <button
+          className={activeTab === 'wareki' ? 'active' : ''}
+          onClick={() => setActiveTab('wareki')}
+        >
+          和暦変換
+        </button>
+        <button
+          className={activeTab === 'time-calc' ? 'active' : ''}
+          onClick={() => setActiveTab('time-calc')}
+        >
+          時刻計算
+        </button>
+        <button
+          className={activeTab === 'countdown' ? 'active' : ''}
+          onClick={() => setActiveTab('countdown')}
+        >
+          カウントダウン
+        </button>
+        <button
+          className={activeTab === 'calendar' ? 'active' : ''}
+          onClick={() => setActiveTab('calendar')}
+        >
+          カレンダー
+        </button>
       </nav>
 
       <main className="app-main">
@@ -57,6 +85,10 @@ function App() {
         {activeTab === 'age' && <AgeTab />}
         {activeTab === 'business' && <BusinessDaysTab />}
         {activeTab === 'recurrence' && <RecurrenceTab />}
+        {activeTab === 'wareki' && <WarekiTab />}
+        {activeTab === 'time-calc' && <TimeCalcTab />}
+        {activeTab === 'countdown' && <CountdownTab />}
+        {activeTab === 'calendar' && <CalendarTab />}
       </main>
 
       <footer className="app-footer">
