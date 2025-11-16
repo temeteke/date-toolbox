@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import type { DateFormatResult } from '../types/dateFormat';
+import type { DateFormatResult } from '../../types/format/dateFormat';
 
 /**
  * 日付を様々なフォーマットに変換

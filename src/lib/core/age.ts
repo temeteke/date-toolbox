@@ -7,7 +7,7 @@ import {
   isBefore,
   startOfDay,
 } from 'date-fns';
-import type { AgeInput, AgeResult, MilestoneAge } from '../types/age';
+import type { AgeInput, AgeResult, MilestoneAge } from '../../types/core/age';
 
 /**
  * 年齢を計算

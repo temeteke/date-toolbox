@@ -1,5 +1,5 @@
 import { isSameDay } from 'date-fns';
-import type { DateCompareResult } from '../types/dateCompare';
+import type { DateCompareResult } from '../../types/core/dateCompare';
 
 /**
  * 複数の日付を比較・ソート

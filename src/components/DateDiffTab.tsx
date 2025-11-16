@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateDateDiff } from '../lib/dateDiff';
+import { calculateDateDiff } from '../lib/core/dateDiff';
 import { isValidDateRange } from '../lib/utils';
-import type { DateDiffOptions } from '../types/dateDiff';
+import type { DateDiffOptions } from '../types/core/dateDiff';
 
 export default function DateDiffTab() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());

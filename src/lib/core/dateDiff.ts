@@ -5,7 +5,7 @@ import {
   isWeekend,
   addDays,
 } from 'date-fns';
-import type { DateDiffOptions, DateDiffResult } from '../types/dateDiff';
+import type { DateDiffOptions, DateDiffResult } from '../../types/core/dateDiff';
 
 /**
  * 2つの日付の差を計算

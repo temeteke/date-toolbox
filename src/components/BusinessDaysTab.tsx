@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { calculateBusinessDays, parseHolidaysFromText } from '../lib/businessDays';
+import { calculateBusinessDays, parseHolidaysFromText } from '../lib/business/businessDays';
 import { formatDateWithWeekdayJa, isValidDateRange } from '../lib/utils';
-import type { BusinessDaysOptions } from '../types/businessDays';
+import type { BusinessDaysOptions } from '../types/business/businessDays';
 
 const WEEKDAY_NAMES = ['日', '月', '火', '水', '木', '金', '土'];
 

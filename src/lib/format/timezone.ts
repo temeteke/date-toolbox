@@ -1,4 +1,4 @@
-import type { TimezoneInfo, TimezoneConversionResult, MultiTimezoneDisplay } from '../types/timezone';
+import type { TimezoneInfo, TimezoneConversionResult, MultiTimezoneDisplay } from '../../types/format/timezone';
 
 /**
  * 主要なタイムゾーンのリスト

@@ -31,108 +31,137 @@ function App() {
       </header>
 
       <nav className="tabs-nav">
-        <button
-          className={activeTab === 'diff' ? 'active' : ''}
-          onClick={() => setActiveTab('diff')}
-        >
-          期間計算
-        </button>
-        <button
-          className={activeTab === 'add-subtract' ? 'active' : ''}
-          onClick={() => setActiveTab('add-subtract')}
-        >
-          加算/減算
-        </button>
-        <button
-          className={activeTab === 'age' ? 'active' : ''}
-          onClick={() => setActiveTab('age')}
-        >
-          年齢計算
-        </button>
-        <button
-          className={activeTab === 'business' ? 'active' : ''}
-          onClick={() => setActiveTab('business')}
-        >
-          営業日
-        </button>
-        <button
-          className={activeTab === 'recurrence' ? 'active' : ''}
-          onClick={() => setActiveTab('recurrence')}
-        >
-          繰り返し
-        </button>
-        <button
-          className={activeTab === 'wareki' ? 'active' : ''}
-          onClick={() => setActiveTab('wareki')}
-        >
-          和暦変換
-        </button>
-        <button
-          className={activeTab === 'time-calc' ? 'active' : ''}
-          onClick={() => setActiveTab('time-calc')}
-        >
-          時刻計算
-        </button>
-        <button
-          className={activeTab === 'countdown' ? 'active' : ''}
-          onClick={() => setActiveTab('countdown')}
-        >
-          カウントダウン
-        </button>
-        <button
-          className={activeTab === 'calendar' ? 'active' : ''}
-          onClick={() => setActiveTab('calendar')}
-        >
-          カレンダー
-        </button>
-        <button
-          className={activeTab === 'timezone' ? 'active' : ''}
-          onClick={() => setActiveTab('timezone')}
-        >
-          タイムゾーン
-        </button>
-        <button
-          className={activeTab === 'work-hours' ? 'active' : ''}
-          onClick={() => setActiveTab('work-hours')}
-        >
-          勤務時間
-        </button>
-        <button
-          className={activeTab === 'date-format' ? 'active' : ''}
-          onClick={() => setActiveTab('date-format')}
-        >
-          フォーマット
-        </button>
-        <button
-          className={activeTab === 'date-stats' ? 'active' : ''}
-          onClick={() => setActiveTab('date-stats')}
-        >
-          期間統計
-        </button>
-        <button
-          className={activeTab === 'anniversary' ? 'active' : ''}
-          onClick={() => setActiveTab('anniversary')}
-        >
-          記念日
-        </button>
-        <button
-          className={activeTab === 'date-compare' ? 'active' : ''}
-          onClick={() => setActiveTab('date-compare')}
-        >
-          日付比較
-        </button>
-        <button
-          className={activeTab === 'history' ? 'active' : ''}
-          onClick={() => setActiveTab('history')}
-        >
-          履歴
-        </button>
-        <button
-          className={activeTab === 'settings' ? 'active' : ''}
-          onClick={() => setActiveTab('settings')}
-        >
-          設定
-        </button>
+        {/* 基本機能 */}
+        <div className="tab-group">
+          <span className="tab-group-label">基本</span>
+          <button
+            className={activeTab === 'diff' ? 'active' : ''}
+            onClick={() => setActiveTab('diff')}
+          >
+            期間計算
+          </button>
+          <button
+            className={activeTab === 'add-subtract' ? 'active' : ''}
+            onClick={() => setActiveTab('add-subtract')}
+          >
+            加算/減算
+          </button>
+          <button
+            className={activeTab === 'age' ? 'active' : ''}
+            onClick={() => setActiveTab('age')}
+          >
+            年齢計算
+          </button>
+          <button
+            className={activeTab === 'date-compare' ? 'active' : ''}
+            onClick={() => setActiveTab('date-compare')}
+          >
+            日付比較
+          </button>
+        </div>
+
+        {/* フォーマット・変換 */}
+        <div className="tab-group">
+          <span className="tab-group-label">フォーマット</span>
+          <button
+            className={activeTab === 'date-format' ? 'active' : ''}
+            onClick={() => setActiveTab('date-format')}
+          >
+            フォーマット
+          </button>
+          <button
+            className={activeTab === 'time-calc' ? 'active' : ''}
+            onClick={() => setActiveTab('time-calc')}
+          >
+            時刻計算
+          </button>
+          <button
+            className={activeTab === 'timezone' ? 'active' : ''}
+            onClick={() => setActiveTab('timezone')}
+          >
+            タイムゾーン
+          </button>
+        </div>
+
+        {/* 分析・統計 */}
+        <div className="tab-group">
+          <span className="tab-group-label">分析</span>
+          <button
+            className={activeTab === 'date-stats' ? 'active' : ''}
+            onClick={() => setActiveTab('date-stats')}
+          >
+            期間統計
+          </button>
+          <button
+            className={activeTab === 'anniversary' ? 'active' : ''}
+            onClick={() => setActiveTab('anniversary')}
+          >
+            記念日
+          </button>
+          <button
+            className={activeTab === 'recurrence' ? 'active' : ''}
+            onClick={() => setActiveTab('recurrence')}
+          >
+            繰り返し
+          </button>
+        </div>
+
+        {/* ビジネス */}
+        <div className="tab-group">
+          <span className="tab-group-label">ビジネス</span>
+          <button
+            className={activeTab === 'business' ? 'active' : ''}
+            onClick={() => setActiveTab('business')}
+          >
+            営業日
+          </button>
+          <button
+            className={activeTab === 'work-hours' ? 'active' : ''}
+            onClick={() => setActiveTab('work-hours')}
+          >
+            勤務時間
+          </button>
+        </div>
+
+        {/* 日本固有 */}
+        <div className="tab-group">
+          <span className="tab-group-label">日本</span>
+          <button
+            className={activeTab === 'wareki' ? 'active' : ''}
+            onClick={() => setActiveTab('wareki')}
+          >
+            和暦変換
+          </button>
+          <button
+            className={activeTab === 'calendar' ? 'active' : ''}
+            onClick={() => setActiveTab('calendar')}
+          >
+            カレンダー
+          </button>
+        </div>
+
+        {/* その他 */}
+        <div className="tab-group">
+          <span className="tab-group-label">その他</span>
+          <button
+            className={activeTab === 'countdown' ? 'active' : ''}
+            onClick={() => setActiveTab('countdown')}
+          >
+            カウントダウン
+          </button>
+          <button
+            className={activeTab === 'history' ? 'active' : ''}
+            onClick={() => setActiveTab('history')}
+          >
+            履歴
+          </button>
+          <button
+            className={activeTab === 'settings' ? 'active' : ''}
+            onClick={() => setActiveTab('settings')}
+          >
+            設定
+          </button>
+        </div>
       </nav>
 
       <main className="app-main">

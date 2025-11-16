@@ -1,6 +1,6 @@
 import { differenceInMilliseconds, addHours, addMinutes, addSeconds, format } from 'date-fns';
-import type { TimeDifference, TimeAddSubtractResult } from '../types/timeCalc';
-import { isValidDate } from './utils';
+import type { TimeDifference, TimeAddSubtractResult } from '../../types/format/timeCalc';
+import { isValidDate } from '../utils';
 
 /**
  * 2つの日時の差を計算

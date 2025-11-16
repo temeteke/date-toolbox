@@ -1,6 +1,6 @@
 import { add, sub, getDay, differenceInDays, isToday as isTodayFn, startOfDay } from 'date-fns';
-import type { AddSubtractInput, AddSubtractResult } from '../types/addSubtract';
-import { getWeekdayNameJa } from './utils';
+import type { AddSubtractInput, AddSubtractResult } from '../../types/core/addSubtract';
+import { getWeekdayNameJa } from '../utils';
 
 /**
  * 日付の加算/減算を行う

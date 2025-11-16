@@ -1,6 +1,6 @@
 import { isSameDay, getDay, addDays, getYear } from 'date-fns';
-import type { Holiday, HolidayCheckResult } from '../types/holiday';
-import { isValidDate } from './utils';
+import type { Holiday, HolidayCheckResult } from '../../types/japanese/holiday';
+import { isValidDate } from '../utils';
 
 /**
  * 春分の日を計算（簡易版）

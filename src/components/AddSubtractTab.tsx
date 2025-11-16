@@ -3,9 +3,9 @@ import DateInput from './common/DateInput';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { addSubtractDate } from '../lib/addSubtract';
+import { addSubtractDate } from '../lib/core/addSubtract';
 import { formatDateWithWeekdayJa } from '../lib/utils';
-import type { TimeUnit } from '../types/addSubtract';
+import type { TimeUnit } from '../types/core/addSubtract';
 
 export default function AddSubtractTab() {
   const [baseDate, setBaseDate] = useState<Date | null>(new Date());

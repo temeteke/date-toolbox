@@ -3,7 +3,7 @@ import DateInput from './common/DateInput';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
-import { convertToWareki, convertToSeireki, getAllEras } from '../lib/wareki';
+import { convertToWareki, convertToSeireki, getAllEras } from '../lib/japanese/wareki';
 
 type ConversionMode = 'to-wareki' | 'to-seireki';
 

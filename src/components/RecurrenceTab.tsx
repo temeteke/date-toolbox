@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ErrorMessage from './common/ErrorMessage';
-import { generateRecurringDates } from '../lib/recurrence';
+import { generateRecurringDates } from '../lib/analysis/recurrence';
 import { formatDateWithWeekdayJa, isValidDateRange } from '../lib/utils';
-import type { RecurrenceType, RecurrencePattern } from '../types/recurrence';
+import type { RecurrenceType, RecurrencePattern } from '../types/analysis/recurrence';
 
 const WEEKDAY_NAMES = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
 const WEEK_NUMBERS = [
