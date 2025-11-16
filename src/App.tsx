@@ -8,9 +8,17 @@ import WarekiTab from './components/WarekiTab';
 import TimeCalcTab from './components/TimeCalcTab';
 import CountdownTab from './components/CountdownTab';
 import CalendarTab from './components/CalendarTab';
+import TimezoneTab from './components/TimezoneTab';
+import WorkHoursTab from './components/WorkHoursTab';
+import DateFormatTab from './components/DateFormatTab';
+import HistoryTab from './components/HistoryTab';
+import DateStatsTab from './components/DateStatsTab';
+import AnniversaryTab from './components/AnniversaryTab';
+import SettingsTab from './components/SettingsTab';
+import DateCompareTab from './components/DateCompareTab';
 import './App.css';
 
-type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar';
+type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar' | 'timezone' | 'work-hours' | 'date-format' | 'history' | 'date-stats' | 'anniversary' | 'settings' | 'date-compare';
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('diff');
@@ -77,6 +85,54 @@ function App() {
         >
           カレンダー
         </button>
+        <button
+          className={activeTab === 'timezone' ? 'active' : ''}
+          onClick={() => setActiveTab('timezone')}
+        >
+          タイムゾーン
+        </button>
+        <button
+          className={activeTab === 'work-hours' ? 'active' : ''}
+          onClick={() => setActiveTab('work-hours')}
+        >
+          勤務時間
+        </button>
+        <button
+          className={activeTab === 'date-format' ? 'active' : ''}
+          onClick={() => setActiveTab('date-format')}
+        >
+          フォーマット
+        </button>
+        <button
+          className={activeTab === 'date-stats' ? 'active' : ''}
+          onClick={() => setActiveTab('date-stats')}
+        >
+          期間統計
+        </button>
+        <button
+          className={activeTab === 'anniversary' ? 'active' : ''}
+          onClick={() => setActiveTab('anniversary')}
+        >
+          記念日
+        </button>
+        <button
+          className={activeTab === 'date-compare' ? 'active' : ''}
+          onClick={() => setActiveTab('date-compare')}
+        >
+          日付比較
+        </button>
+        <button
+          className={activeTab === 'history' ? 'active' : ''}
+          onClick={() => setActiveTab('history')}
+        >
+          履歴
+        </button>
+        <button
+          className={activeTab === 'settings' ? 'active' : ''}
+          onClick={() => setActiveTab('settings')}
+        >
+          設定
+        </button>
       </nav>
 
       <main className="app-main">
@@ -89,6 +145,14 @@ function App() {
         {activeTab === 'time-calc' && <TimeCalcTab />}
         {activeTab === 'countdown' && <CountdownTab />}
         {activeTab === 'calendar' && <CalendarTab />}
+        {activeTab === 'timezone' && <TimezoneTab />}
+        {activeTab === 'work-hours' && <WorkHoursTab />}
+        {activeTab === 'date-format' && <DateFormatTab />}
+        {activeTab === 'date-stats' && <DateStatsTab />}
+        {activeTab === 'anniversary' && <AnniversaryTab />}
+        {activeTab === 'date-compare' && <DateCompareTab />}
+        {activeTab === 'history' && <HistoryTab />}
+        {activeTab === 'settings' && <SettingsTab />}
       </main>
 
       <footer className="app-footer">
