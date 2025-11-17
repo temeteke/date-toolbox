@@ -32,7 +32,7 @@ const ERAS: WarekiEra[] = [
     nameEn: 'Heisei',
     symbol: 'H',
     startDate: new Date(1989, 0, 8),   // 1989年1月8日
-    endDate: new Date(2019, 4, 30),    // 2019年4月30日
+    endDate: new Date(2019, 3, 30),    // 2019年4月30日
   },
   {
     name: '令和',
