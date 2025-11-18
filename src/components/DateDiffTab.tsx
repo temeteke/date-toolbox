@@ -1,17 +1,18 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
 import { calculateDateDiff } from '../lib/core/dateDiff';
 import { isValidDateRange } from '../lib/utils';
+import { useQueryParamDate, useQueryParamBoolean } from '../hooks/useQueryParams';
 import type { DateDiffOptions } from '../types/core/dateDiff';
 
 export default function DateDiffTab() {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [includeStartDate, setIncludeStartDate] = useState(true);
-  const [includeEndDate, setIncludeEndDate] = useState(true);
-  const [excludeWeekends, setExcludeWeekends] = useState(false);
+  const [startDate, setStartDate] = useQueryParamDate('startDate', new Date());
+  const [endDate, setEndDate] = useQueryParamDate('endDate', new Date());
+  const [includeStartDate, setIncludeStartDate] = useQueryParamBoolean('includeStartDate', true);
+  const [includeEndDate, setIncludeEndDate] = useQueryParamBoolean('includeEndDate', true);
+  const [excludeWeekends, setExcludeWeekends] = useQueryParamBoolean('excludeWeekends', false);
 
   const { result, error } = useMemo(() => {
     if (!startDate || !endDate) {

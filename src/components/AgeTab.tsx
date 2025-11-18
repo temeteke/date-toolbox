@@ -1,14 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import DateInput from './common/DateInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
 import { calculateAge, calculateMilestoneAges } from '../lib/core/age';
 import { formatDateJa, isValidDate } from '../lib/utils';
+import { useQueryParamDate, useQueryParamBoolean } from '../hooks/useQueryParams';
 
 export default function AgeTab() {
-  const [birthDate, setBirthDate] = useState<Date | null>(null);
-  const [referenceDate, setReferenceDate] = useState<Date | null>(new Date());
-  const [showMilestones, setShowMilestones] = useState(false);
+  const [birthDate, setBirthDate] = useQueryParamDate('birthDate', null);
+  const [referenceDate, setReferenceDate] = useQueryParamDate('referenceDate', new Date());
+  const [showMilestones, setShowMilestones] = useQueryParamBoolean('showMilestones', false);
 
   const { result, error } = useMemo(() => {
     if (!birthDate) {

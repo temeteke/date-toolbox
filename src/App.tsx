@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DateDiffTab from './components/DateDiffTab';
 import AddSubtractTab from './components/AddSubtractTab';
 import AgeTab from './components/AgeTab';
@@ -16,6 +16,7 @@ import DateStatsTab from './components/DateStatsTab';
 import AnniversaryTab from './components/AnniversaryTab';
 import SettingsTab from './components/SettingsTab';
 import DateCompareTab from './components/DateCompareTab';
+import { useQueryParams } from './hooks/useQueryParams';
 import './App.css';
 
 type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar' | 'timezone' | 'work-hours' | 'date-format' | 'history' | 'date-stats' | 'anniversary' | 'settings' | 'date-compare';
@@ -89,8 +90,54 @@ const categories: CategoryInfo[] = [
 ];
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState<CategoryId>('basic');
-  const [activeTab, setActiveTab] = useState<TabId>('diff');
+  const { getParam, setParam } = useQueryParams();
+
+  // URLパラメータから初期値を取得
+  const [activeCategory, setActiveCategory] = useState<CategoryId>(() => {
+    const paramCategory = getParam('category') as CategoryId;
+    return paramCategory && categories.some(c => c.id === paramCategory)
+      ? paramCategory
+      : 'basic';
+  });
+
+  const [activeTab, setActiveTab] = useState<TabId>(() => {
+    const paramTab = getParam('tab') as TabId;
+    // タブが有効かチェック
+    const isValidTab = categories.some(category =>
+      category.tabs.some(tab => tab.id === paramTab)
+    );
+    return isValidTab ? paramTab : 'diff';
+  });
+
+  // カテゴリーとタブの変更をURLパラメータに同期
+  useEffect(() => {
+    setParam('category', activeCategory);
+  }, [activeCategory, setParam]);
+
+  useEffect(() => {
+    setParam('tab', activeTab);
+  }, [activeTab, setParam]);
+
+  // URLパラメータの変更を監視（戻る/進むボタン対応）
+  useEffect(() => {
+    const handlePopState = () => {
+      const paramCategory = getParam('category') as CategoryId;
+      const paramTab = getParam('tab') as TabId;
+
+      if (paramCategory && categories.some(c => c.id === paramCategory)) {
+        setActiveCategory(paramCategory);
+      }
+
+      if (paramTab && categories.some(category =>
+        category.tabs.some(tab => tab.id === paramTab)
+      )) {
+        setActiveTab(paramTab);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [getParam]);
 
   const handleCategoryChange = (categoryId: CategoryId) => {
     setActiveCategory(categoryId);

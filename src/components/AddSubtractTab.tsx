@@ -1,16 +1,17 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import DateInput from './common/DateInput';
 import NumberInput from './common/NumberInput';
 import ResultCard from './common/ResultCard';
 import ErrorMessage from './common/ErrorMessage';
 import { addSubtractDate } from '../lib/core/addSubtract';
 import { formatDateWithWeekdayJa } from '../lib/utils';
+import { useQueryParamDate, useQueryParamNumber, useQueryParamState } from '../hooks/useQueryParams';
 import type { TimeUnit } from '../types/core/addSubtract';
 
 export default function AddSubtractTab() {
-  const [baseDate, setBaseDate] = useState<Date | null>(new Date());
-  const [amount, setAmount] = useState(0);
-  const [unit, setUnit] = useState<TimeUnit>('days');
+  const [baseDate, setBaseDate] = useQueryParamDate('baseDate', new Date());
+  const [amount, setAmount] = useQueryParamNumber('amount', 0);
+  const [unit, setUnit] = useQueryParamState<TimeUnit>('unit', 'days');
 
   const { result, error } = useMemo(() => {
     if (!baseDate) {
