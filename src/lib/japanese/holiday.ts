@@ -163,7 +163,7 @@ function calculateSubstituteHolidays(holidays: Holiday[], year: number): Holiday
         substitutes.push({
           date: nextDay,
           name: '振替休日',
-          type: 'substitue',
+          type: 'substitute',
         });
       }
     }

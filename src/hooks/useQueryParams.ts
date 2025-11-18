@@ -98,7 +98,7 @@ export function useQueryParamState<T extends string>(
     if (paramValue && paramValue !== state) {
       setState(paramValue as T);
     }
-  }, [key, getParam]);
+  }, [key, getParam, state]);
 
   // 状態を更新してURLパラメータに反映
   const updateState = useCallback(
