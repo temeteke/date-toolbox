@@ -40,7 +40,6 @@ button {
   font-family: inherit;
   background-color: #f9f9f9;
   cursor: pointer;
-  transition: border-color 0.25s, background-color 0.25s;
 }
 
 button:hover:not(:disabled) {
@@ -65,7 +64,6 @@ select {
   padding: 0.5em;
   font-size: 1em;
   font-family: inherit;
-  transition: border-color 0.25s;
 }
 
 input:focus,
