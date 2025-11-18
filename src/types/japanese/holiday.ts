@@ -1,7 +1,7 @@
 export interface Holiday {
   date: Date;
   name: string;
-  type: 'fixed' | 'variable' | 'substitue';
+  type: 'fixed' | 'variable' | 'substitute';
 }
 
 export interface HolidayCheckResult {

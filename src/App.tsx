@@ -90,7 +90,7 @@ const categories: CategoryInfo[] = [
 ];
 
 function App() {
-  const { getParam, setParam, clearParams } = useQueryParams();
+  const { getParam, setParam } = useQueryParams();
 
   // URLパラメータから初期値を取得
   const [activeCategory, setActiveCategory] = useState<CategoryId>(() => {
