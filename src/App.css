@@ -25,51 +25,74 @@
 
 .tabs-nav {
   display: flex;
-  gap: 1.5rem;
-  padding: 1rem;
+  flex-direction: column;
+  gap: 0;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  overflow-x: auto;
 }
 
-.tab-group {
+/* カテゴリータブ（上段） */
+.category-tabs {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  gap: 0;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: #f9f9f9;
 }
 
-.tab-group-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #667eea;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0 0.5em;
-  margin-bottom: 0.2rem;
-}
-
-.tabs-nav button {
-  flex-shrink: 0;
-  padding: 0.6em 1em;
-  background-color: #f0f0f0;
+.category-tabs button {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
   border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
   white-space: nowrap;
 }
 
-.tabs-nav button.active {
-  background-color: #667eea;
-  color: white;
+.category-tabs button.active {
+  background-color: white;
+  color: #667eea;
+  border-bottom-color: #667eea;
 }
 
-.tabs-nav button:hover:not(:disabled) {
-  background-color: #764ba2;
+.category-tabs button:hover:not(.active) {
+  background-color: #f0f0f0;
+  color: #764ba2;
+}
+
+/* 機能タブ（下段） */
+.function-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.function-tabs button {
+  padding: 0.7rem 1.5rem;
+  background-color: #f0f0f0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.function-tabs button.active {
+  background-color: #667eea;
   color: white;
-  border-color: transparent;
+  border-color: #667eea;
+}
+
+.function-tabs button:hover:not(.active) {
+  background-color: #e0e0e0;
+  border-color: #764ba2;
+  color: #764ba2;
 }
 
 .app-main {
@@ -98,18 +121,7 @@
 .time-calc-tab,
 .countdown-tab,
 .calendar-tab {
-  animation: fadeIn 0.3s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* アニメーション削除 */
 }
 
 .input-section {
@@ -174,7 +186,7 @@
 }
 
 .results-section {
-  animation: fadeIn 0.4s;
+  /* アニメーション削除 */
 }
 
 .result-card {
@@ -282,14 +294,19 @@
     padding: 1rem;
   }
 
-  .tabs-nav {
+  .category-tabs button {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .function-tabs {
     gap: 0.3rem;
     padding: 0.5rem;
   }
 
-  .tabs-nav button {
-    padding: 0.6em 1em;
-    font-size: 0.9rem;
+  .function-tabs button {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
   }
 
   .result-item {
@@ -314,23 +331,42 @@
     background-color: #2a2a3a;
   }
 
-  .tab-group-label {
-    color: #a0a0ff;
+  .category-tabs {
+    background-color: #1a1a2a;
+    border-bottom-color: #3a3a4a;
   }
 
-  .tabs-nav button {
+  .category-tabs button {
+    color: #b0b0b0;
+  }
+
+  .category-tabs button.active {
+    background-color: #2a2a3a;
+    color: #a0a0ff;
+    border-bottom-color: #667eea;
+  }
+
+  .category-tabs button:hover:not(.active) {
+    background-color: #252535;
+    color: #c0c0ff;
+  }
+
+  .function-tabs button {
     background-color: #1a1a2a;
     color: #e0e0e0;
+    border-color: #3a3a4a;
   }
 
-  .tabs-nav button.active {
+  .function-tabs button.active {
     background-color: #667eea;
     color: white;
+    border-color: #667eea;
   }
 
-  .tabs-nav button:hover:not(:disabled) {
-    background-color: #764ba2;
-    color: white;
+  .function-tabs button:hover:not(.active) {
+    background-color: #252535;
+    border-color: #764ba2;
+    color: #c0c0ff;
   }
 
   .app-footer {
@@ -441,7 +477,6 @@
   background-color: #f9f9f9;
   border-radius: 4px;
   font-size: 0.95rem;
-  transition: background-color 0.2s;
 }
 
 .date-item:hover {
@@ -468,7 +503,6 @@
   padding: 1rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  transition: border-color 0.3s;
 }
 
 .pattern-option:has(input[type="radio"]:checked) {
@@ -667,13 +701,11 @@
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s;
   position: relative;
 }
 
 .calendar-day:hover {
   background-color: #f0f0f0;
-  transform: scale(1.05);
 }
 
 .calendar-day.other-month {
@@ -683,7 +715,6 @@
 
 .calendar-day.other-month:hover {
   background-color: transparent;
-  transform: none;
 }
 
 .calendar-day.today {
@@ -741,7 +772,6 @@
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .calendar-controls button:hover {
