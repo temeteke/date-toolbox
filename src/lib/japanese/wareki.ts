@@ -11,14 +11,14 @@ const ERAS: WarekiEra[] = [
     nameEn: 'Meiji',
     symbol: 'M',
     startDate: new Date(1868, 0, 25),  // 1868年1月25日
-    endDate: new Date(1912, 6, 29),    // 1912年7月29日
+    endDate: new Date(1912, 6, 30),    // 1912年7月30日
   },
   {
     name: '大正',
     nameEn: 'Taisho',
     symbol: 'T',
     startDate: new Date(1912, 6, 30),  // 1912年7月30日
-    endDate: new Date(1926, 11, 24),   // 1926年12月24日
+    endDate: new Date(1926, 11, 25),   // 1926年12月25日
   },
   {
     name: '昭和',
@@ -53,7 +53,9 @@ export function getEraForDate(date: Date): WarekiEra | null {
     return null;
   }
 
-  for (const era of ERAS) {
+  // 新しい元号を優先するため、配列を逆順で検索
+  for (let i = ERAS.length - 1; i >= 0; i--) {
+    const era = ERAS[i];
     const afterStart = isAfter(date, era.startDate) || isEqual(date, era.startDate);
     const beforeEnd = era.endDate === null || isBefore(date, era.endDate) || isEqual(date, era.endDate);
 
