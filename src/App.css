@@ -17,6 +17,17 @@
   margin: 0;
 }
 
+.app-header h1 a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.app-header h1 a:hover {
+  opacity: 0.8;
+}
+
 .app-header p {
   font-size: 1.1rem;
   margin: 0.5rem 0 0 0;
