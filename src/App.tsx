@@ -90,7 +90,7 @@ const categories: CategoryInfo[] = [
 ];
 
 function App() {
-  const { getParam, setParam } = useQueryParams();
+  const { getParam, setParam, clearParams } = useQueryParams();
 
   // URLパラメータから初期値を取得
   const [activeCategory, setActiveCategory] = useState<CategoryId>(() => {
@@ -148,12 +148,22 @@ function App() {
     }
   };
 
+  const handleReset = () => {
+    clearParams();
+    setActiveCategory('basic');
+    setActiveTab('diff');
+  };
+
   const currentCategory = categories.find(c => c.id === activeCategory);
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>📅 Date Toolbox</h1>
+        <h1>
+          <a href="/" onClick={(e) => { e.preventDefault(); handleReset(); }}>
+            📅 Date Toolbox
+          </a>
+        </h1>
         <p>日付計算ツール集</p>
       </header>
 
