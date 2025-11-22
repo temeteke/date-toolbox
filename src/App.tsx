@@ -154,7 +154,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>
-          <a href="/">📅 Date Toolbox</a>
+          <a href={import.meta.env.BASE_URL}>📅 Date Toolbox</a>
         </h1>
         <p>日付計算ツール集</p>
       </header>
