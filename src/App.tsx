@@ -16,10 +16,14 @@ import DateStatsTab from './components/DateStatsTab';
 import AnniversaryTab from './components/AnniversaryTab';
 import SettingsTab from './components/SettingsTab';
 import DateCompareTab from './components/DateCompareTab';
+import LeapYearTab from './components/LeapYearTab';
+import MoonPhaseTab from './components/MoonPhaseTab';
+// import BatchTab from './components/BatchTab';
+import CalendarExportTab from './components/CalendarExportTab';
 import { useQueryParams } from './hooks/useQueryParams';
 import './App.css';
 
-type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar' | 'timezone' | 'work-hours' | 'date-format' | 'history' | 'date-stats' | 'anniversary' | 'settings' | 'date-compare';
+type TabId = 'diff' | 'add-subtract' | 'business' | 'recurrence' | 'age' | 'wareki' | 'time-calc' | 'countdown' | 'calendar' | 'timezone' | 'work-hours' | 'date-format' | 'history' | 'date-stats' | 'anniversary' | 'settings' | 'date-compare' | 'leap-year' | 'moon-phase' | 'calendar-export';
 type CategoryId = 'basic' | 'format' | 'analysis' | 'business' | 'japan' | 'other';
 
 interface TabInfo {
@@ -60,6 +64,7 @@ const categories: CategoryInfo[] = [
       { id: 'date-stats', label: '期間統計' },
       { id: 'anniversary', label: '記念日' },
       { id: 'recurrence', label: '繰り返し' },
+      { id: 'leap-year', label: 'うるう年' },
     ],
   },
   {
@@ -76,6 +81,7 @@ const categories: CategoryInfo[] = [
     tabs: [
       { id: 'wareki', label: '和暦変換' },
       { id: 'calendar', label: 'カレンダー' },
+      { id: 'moon-phase', label: '月相' },
     ],
   },
   {
@@ -83,6 +89,7 @@ const categories: CategoryInfo[] = [
     label: 'その他',
     tabs: [
       { id: 'countdown', label: 'カウントダウン' },
+      { id: 'calendar-export', label: 'エクスポート' },
       { id: 'history', label: '履歴' },
       { id: 'settings', label: '設定' },
     ],
@@ -203,6 +210,9 @@ function App() {
         {activeTab === 'date-stats' && <DateStatsTab />}
         {activeTab === 'anniversary' && <AnniversaryTab />}
         {activeTab === 'date-compare' && <DateCompareTab />}
+        {activeTab === 'leap-year' && <LeapYearTab />}
+        {activeTab === 'moon-phase' && <MoonPhaseTab />}
+        {activeTab === 'calendar-export' && <CalendarExportTab />}
         {activeTab === 'history' && <HistoryTab />}
         {activeTab === 'settings' && <SettingsTab />}
       </main>
