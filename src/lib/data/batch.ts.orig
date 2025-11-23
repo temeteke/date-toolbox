@@ -1,0 +1,359 @@
+/**
+ * バッチ処理ライブラリ
+ */
+
+import { parseISO, isValid, format, addDays, addMonths, addYears } from 'date-fns';
+import { calculateDateDiff } from '../core/dateDiff';
+import { calculateBusinessDays } from '../business/businessDays';
+import { calculateAge } from '../core/age';
+import type { BatchInput, BatchResult, BatchProcessResult } from '../../types/data/batch';
+
+/**
+ * CSV文字列をパース
+ * @param csv CSV文字列
+ * @returns 日付文字列のリスト
+ */
+export function parseCSV(csv: string): string[] {
+  return csv
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+}
+
+/**
+ * 日付文字列を検証
+ * @param dateStr 日付文字列
+ * @returns 検証済みの日付（失敗時はnull）
+ */
+function validateDate(dateStr: string): Date | null {
+  try {
+    const date = parseISO(dateStr);
+    return isValid(date) ? date : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 期間計算のバッチ処理
+ * @param dates 日付文字列のリスト（開始日,終了日のペア）
+ * @returns バッチ結果
+ */
+function batchDateDiff(dates: string[]): BatchResult[] {
+  const results: BatchResult[] = [];
+
+  dates.forEach((line, index) => {
+    const parts = line.split(',').map(p => p.trim());
+    if (parts.length !== 2) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '開始日と終了日をカンマ区切りで入力してください',
+      });
+      return;
+    }
+
+    const startDate = validateDate(parts[0]);
+    const endDate = validateDate(parts[1]);
+
+    if (!startDate || !endDate) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '日付の形式が正しくありません（例: 2024-01-01,2024-12-31）',
+      });
+      return;
+    }
+
+    try {
+      const diff = calculateDateDiff(startDate, endDate, {
+        includeStartDate: true,
+        includeEndDate: true,
+        excludeWeekends: false
+      });
+      const output = `${diff.totalDays}日, ${diff.weeks}週${diff.remainingDays}日, ${diff.years}年${diff.months}月${diff.days}日`;
+      const diff = calculateDateDiff(startDate, endDate, {
+        includeStartDate: true,
+        includeEndDate: true,
+        excludeWeekends: false
+      });
+      const output = `${diff.totalDays}日, ${diff.weeks}週${diff.remainingDays}日, ${diff.years}年${diff.months}月${diff.days}日`;
+      results.push({
+        index,
+        input: line,
+        success: true,
+        output,
+      });
+    } catch (error) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: error instanceof Error ? error.message : '計算エラー',
+      });
+    }
+  });
+
+  return results;
+}
+
+/**
+ * 加算/減算のバッチ処理
+ * @param dates 日付文字列のリスト（日付,加算値,単位）
+ * @returns バッチ結果
+ */
+function batchAddSubtract(dates: string[]): BatchResult[] {
+  const results: BatchResult[] = [];
+
+  dates.forEach((line, index) => {
+    const parts = line.split(',').map(p => p.trim());
+    if (parts.length !== 3) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '日付,数値,単位（days/months/years）をカンマ区切りで入力してください',
+      });
+      return;
+    }
+
+    const date = validateDate(parts[0]);
+    const value = parseInt(parts[1], 10);
+    const unit = parts[2].toLowerCase();
+
+    if (!date) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '日付の形式が正しくありません',
+      });
+      return;
+    }
+
+    if (isNaN(value)) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '数値が正しくありません',
+      });
+      return;
+    }
+
+    try {
+      let resultDate: Date;
+      switch (unit) {
+        case 'days':
+        case 'day':
+          resultDate = addDays(date, value);
+          break;
+        case 'months':
+        case 'month':
+          resultDate = addMonths(date, value);
+          break;
+        case 'years':
+        case 'year':
+          resultDate = addYears(date, value);
+          break;
+        default:
+          results.push({
+            index,
+            input: line,
+            success: false,
+            error: '単位はdays/months/yearsのいずれかを指定してください',
+          });
+          return;
+      }
+
+      const output = format(resultDate, 'yyyy-MM-dd');
+      results.push({
+        index,
+        input: line,
+        success: true,
+        output,
+      });
+    } catch (error) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: error instanceof Error ? error.message : '計算エラー',
+      });
+    }
+  });
+
+  return results;
+}
+
+/**
+ * 営業日計算のバッチ処理
+ * @param dates 日付文字列のリスト（開始日,終了日）
+ * @returns バッチ結果
+ */
+function batchBusinessDays(dates: string[]): BatchResult[] {
+  const results: BatchResult[] = [];
+
+  dates.forEach((line, index) => {
+    const parts = line.split(',').map(p => p.trim());
+    if (parts.length !== 2) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '開始日と終了日をカンマ区切りで入力してください',
+      });
+      return;
+    }
+
+    const startDate = validateDate(parts[0]);
+    const endDate = validateDate(parts[1]);
+
+    if (!startDate || !endDate) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '日付の形式が正しくありません',
+      });
+      return;
+    }
+
+    try {
+      const result = calculateBusinessDays(startDate, endDate, {
+        excludedWeekdays: [0, 6], // 土日
+        holidays: [],
+      });
+      const output = `${result.businessDays}営業日`;
+      results.push({
+        index,
+        input: line,
+        success: true,
+        output,
+      });
+    } catch (error) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: error instanceof Error ? error.message : '計算エラー',
+      });
+    }
+  });
+
+  return results;
+}
+
+/**
+ * 年齢計算のバッチ処理
+ * @param dates 日付文字列のリスト（生年月日）
+ * @returns バッチ結果
+ */
+function batchAge(dates: string[]): BatchResult[] {
+  const results: BatchResult[] = [];
+
+  dates.forEach((line, index) => {
+    const dateStr = line.trim();
+    const birthDate = validateDate(dateStr);
+
+    if (!birthDate) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: '日付の形式が正しくありません',
+      });
+      return;
+    }
+
+    try {
+      const age = calculateAge(birthDate);
+      const output = `${age.years}歳${age.months}か月${age.days}日`;
+      results.push({
+        index,
+        input: line,
+        success: true,
+        output,
+      });
+    } catch (error) {
+      results.push({
+        index,
+        input: line,
+        success: false,
+        error: error instanceof Error ? error.message : '計算エラー',
+      });
+    }
+  });
+
+  return results;
+}
+
+/**
+ * バッチ処理を実行
+ * @param input バッチ入力
+ * @returns バッチ処理結果
+ */
+export function processBatch(input: BatchInput): BatchProcessResult {
+  let results: BatchResult[];
+
+  switch (input.operation) {
+    case 'dateDiff':
+      results = batchDateDiff(input.dates);
+      break;
+    case 'addSubtract':
+      results = batchAddSubtract(input.dates);
+      break;
+    case 'businessDays':
+      results = batchBusinessDays(input.dates);
+      break;
+    case 'age':
+      results = batchAge(input.dates);
+      break;
+    default:
+      throw new Error(`未対応の操作: ${input.operation}`);
+  }
+
+  const successCount = results.filter(r => r.success).length;
+  const errorCount = results.filter(r => !r.success).length;
+
+  // CSV出力を生成
+  const csvLines = ['入力,結果,エラー'];
+  results.forEach(r => {
+    const output = r.success ? r.output || '' : '';
+    const error = r.success ? '' : r.error || '';
+    csvLines.push(`"${r.input}","${output}","${error}"`);
+  });
+  const csv = csvLines.join('\n');
+
+  return {
+    operation: input.operation,
+    totalCount: results.length,
+    successCount,
+    errorCount,
+    results,
+    csv,
+  };
+}
+
+/**
+ * CSV結果をダウンロード
+ * @param result バッチ処理結果
+ * @param filename ファイル名
+ */
+export function downloadCSV(result: BatchProcessResult, filename: string = 'batch_result.csv') {
+  const blob = new Blob([result.csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+}

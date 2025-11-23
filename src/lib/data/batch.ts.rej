@@ -1,0 +1,17 @@
+--- src/lib/data/batch.ts
++++ src/lib/data/batch.ts
+@@ -69,8 +69,12 @@ function batchDateDiff(dates: string[]): BatchResult[] {
+     }
+ 
+     try {
+-      const diff = calculateDateDiff(startDate, endDate, { includeEndDate: true });
+-      const output = `${diff.days}日, ${diff.weeks.weeks}週${diff.weeks.days}日, ${diff.years.years}年${diff.years.months}月${diff.years.days}日`;
++      const diff = calculateDateDiff(startDate, endDate, {
++        includeStartDate: true,
++        includeEndDate: true,
++        excludeWeekends: false
++      });
++      const output = `${diff.totalDays}日, ${diff.weeks}週${diff.remainingDays}日, ${diff.years}年${diff.months}月${diff.days}日`;
+       results.push({
+         index,
+         input: line,

@@ -10,11 +10,16 @@ import {
   format,
 } from 'date-fns';
 import { ja } from 'date-fns/locale';
+import type { RokuyoType } from '../../lib/japanese/rokuyo';
 
 interface CalendarProps {
   currentDate: Date;
   highlightDates?: Date[];
   holidayDates?: Map<string, string>;
+  sekkiDates?: Map<string, string>;
+  rokuyoDates?: Map<string, RokuyoType>;
+  showRokuyo?: boolean;
+  showSekki?: boolean;
   onDateClick?: (date: Date) => void;
 }
 
@@ -22,6 +27,10 @@ export default function Calendar({
   currentDate,
   highlightDates = [],
   holidayDates = new Map(),
+  sekkiDates = new Map(),
+  rokuyoDates = new Map(),
+  showRokuyo = false,
+  showSekki = false,
   onDateClick,
 }: CalendarProps) {
   const calendarDays = useMemo(() => {
@@ -64,6 +73,8 @@ export default function Calendar({
             const isHighlighted = highlightDates.some(d => isSameDay(d, day));
             const dateKey = format(day, 'yyyy-MM-dd');
             const holidayName = holidayDates.get(dateKey);
+            const sekkiName = sekkiDates.get(dateKey);
+            const rokuyo = rokuyoDates.get(dateKey);
             const isToday = isSameDay(day, new Date());
             const dayOfWeek = day.getDay();
             const isSunday = dayOfWeek === 0;
@@ -85,6 +96,12 @@ export default function Calendar({
                 <div className="day-number">{format(day, 'd')}</div>
                 {holidayName && isCurrentMonth && (
                   <div className="holiday-name">{holidayName}</div>
+                )}
+                {showSekki && sekkiName && isCurrentMonth && (
+                  <div className="sekki-name">{sekkiName}</div>
+                )}
+                {showRokuyo && rokuyo && isCurrentMonth && (
+                  <div className="rokuyo-name">{rokuyo}</div>
                 )}
               </div>
             );
